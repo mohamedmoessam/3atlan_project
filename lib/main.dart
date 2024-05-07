@@ -1,3 +1,5 @@
+import 'package:final_one/Acessories/Oil_Accessories.dart';
+import 'package:final_one/CheckOut_page.dart';
 import 'package:final_one/Home/Services/Services_page.dart';
 import 'package:flutter/material.dart';
 import 'Home/home_screen.dart';
@@ -24,8 +26,10 @@ class MyApp extends StatelessWidget {
         SignupScreen.RouteName: (context)=>SignupScreen(),
         HomeScreen.RouteName: (context)=>HomeScreen(),
         ServiceScreen.RouteName: (context)=>ServiceScreen(),
+        CheckoutPage.RouteName: (context)=>CheckoutPage(),
+        OilScreen.RouteName: (context)=>OilScreen(),
       },
-      initialRoute: ServiceScreen.RouteName,
+      initialRoute: LoginScreen.RouteName,
     );
   }
 }

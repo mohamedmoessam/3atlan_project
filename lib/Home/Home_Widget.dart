@@ -1,3 +1,4 @@
+import 'package:final_one/Acessories/Oil_Accessories.dart';
 import 'package:flutter/material.dart';
 import '../../Theme.dart';
 
@@ -30,8 +31,10 @@ class Accessories extends StatelessWidget {
   Widget image;
   String Name;
   int Price;
+  String RouteName;
 
-  Accessories({required this.image,required this.Name,required this.Price,});
+
+  Accessories({required this.image,required this.Name,required this.Price,required this.RouteName});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +68,9 @@ class Accessories extends StatelessWidget {
                             Icon(Icons.currency_pound, size: 20, color: MyTheme.PrimaryLight,),
                           ]),
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(RouteName);
+                          },
                           child: Text('Next', style: Theme.of(context).textTheme.bodySmall,),
                           style: ElevatedButton.styleFrom(
                               fixedSize: Size(105.0, 35.0),
