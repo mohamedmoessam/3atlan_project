@@ -28,7 +28,7 @@ class _ItemAccesoriesWidgetState extends State<ItemAccesoriesWidget> {
       children: [
         Expanded(
           child: Container(
-              width: MediaQuery.sizeOf(context).width*0.35,height: MediaQuery.sizeOf(context).height*0.27,
+              width: MediaQuery.sizeOf(context).width*0.42,height: MediaQuery.sizeOf(context).height*0.27,
               child: Image.asset(widget.ImagePath,fit: BoxFit.cover,)),
         ),
         Container(

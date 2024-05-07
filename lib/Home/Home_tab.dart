@@ -1,6 +1,7 @@
 import 'package:final_one/Home/Services/Services_page.dart';
 import 'package:flutter/material.dart';
 import '../Acessories/Oil_Accessories.dart';
+import '../Acessories/car_tire.dart';
 import 'Home_Widget.dart';
 import '../../Theme.dart';
 
@@ -61,14 +62,12 @@ class Hometab extends StatelessWidget {
                             Text('92',style: Theme.of(context).textTheme.titleLarge,)
                           ],
                         )),
-
                       ]),
                 ),
                 Text("Accessories",style: Theme.of(context).textTheme.titleLarge),
-
-                Accessories(image: Image.asset('assets/images/car_tire.png'), Name: 'Car Tire', Price: 300, RouteName: OilScreen.RouteName,),
-                Accessories(image: Image.asset('assets/images/exhaust.png'), Name: 'Exhaust', Price: 300, RouteName: '',),
-                Accessories(image: Image.asset('assets/images/oil.png'), Name: 'Car Oil', Price: 300, RouteName: '',),
+                Accessories(image: Image.asset('assets/images/car_tire.png'), Name: 'Car Tire', Price: 300, RouteName: CarTireScreen.RouteName,),
+                Accessories(image: Image.asset('assets/images/exhaust.png'), Name: 'Exhaust', Price: 300, RouteName: ''),
+                Accessories(image: Image.asset('assets/images/oil.png'), Name: 'Car Oil', Price: 300, RouteName:  OilScreen.RouteName,),
                 Accessories(image: Image.asset('assets/images/lantern.png'), Name: 'Car Lantern', Price: 300, RouteName: '',),
                 Accessories(image: Image.asset('assets/images/phone.png'), Name: 'Phone Holder', Price: 300, RouteName: '',),
               ]),

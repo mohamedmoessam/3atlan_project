@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../Theme.dart';
 
 class OilScreen extends StatefulWidget {
-  static  String RouteName="item";
+  static  String RouteName="oil";
 
 
 
