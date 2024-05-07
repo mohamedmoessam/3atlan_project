@@ -63,13 +63,8 @@ class Hometab extends StatelessWidget {
 
                       ]),
                 ),
-                Row(
-                  children: [
-                    Text("Accessories",style: Theme.of(context).textTheme.titleLarge),
-                    Spacer(),
-                    ElevatedButton(onPressed: (){},child: Text('See All',style: TextStyle(color: MyTheme.BlackLight)),style: ElevatedButton.styleFrom(backgroundColor: MyTheme.BabyBlueLight,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),)
-                  ],
-                ),
+                Text("Accessories",style: Theme.of(context).textTheme.titleLarge),
+
                 Accessories(image: Image.asset('assets/images/car_tire.png'), Name: 'Car Tire', Price: 300),
                 Accessories(image: Image.asset('assets/images/exhaust.png'), Name: 'Exhaust', Price: 300),
                 Accessories(image: Image.asset('assets/images/oil.png'), Name: 'Car Oil', Price: 300),

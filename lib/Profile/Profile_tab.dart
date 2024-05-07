@@ -1,16 +1,23 @@
 import 'package:final_one/Profile/profile_Widget.dart';
+import 'package:final_one/Register/Login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:switcher_button/switcher_button.dart';
 import '../../Theme.dart';
 
-class Profiletab extends StatelessWidget {
+class Profiletab extends StatefulWidget {
 
+  @override
+  State<Profiletab> createState() => _ProfiletabState();
+}
+
+class _ProfiletabState extends State<Profiletab> {
   var NameController=TextEditingController();
   var PhoneController=TextEditingController();
   var EmailController=TextEditingController();
   var PasswordController=TextEditingController();
   var CarModelController=TextEditingController();
   var CarYearController=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +111,9 @@ class Profiletab extends StatelessWidget {
                             thickness: 1,
                           ),
                           ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+
+                              },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -132,7 +141,9 @@ class Profiletab extends StatelessWidget {
                             height: 20,
                           ),
                           ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(LoginScreen.RouteName);
+                              },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
