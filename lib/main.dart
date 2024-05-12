@@ -1,4 +1,4 @@
-import 'package:final_one/CheckOut_page.dart';
+import 'package:final_one/Cart/CheckOut_page.dart';
 import 'package:final_one/Home/Services/Services_page.dart';
 import 'package:flutter/material.dart';
 import 'Home/Acessories/Exhaust_Accessories.dart';

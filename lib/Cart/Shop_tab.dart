@@ -1,3 +1,4 @@
+import 'package:final_one/Cart/CheckOut_page.dart';
 import 'package:final_one/Theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +75,9 @@ class _ShoptabState extends State<Shoptab> {
                                   ]),
                               Spacer(),
                               ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(CheckoutPage.RouteName);
+                                  },
                                   child: Text('Check Out', style: TextStyle(color: MyTheme.OrangeLight,fontWeight: FontWeight.bold,fontSize: 20),),
                                   style: ElevatedButton.styleFrom(
                                       fixedSize: Size(130.0, 30.0),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../Theme.dart';
+import '../Cart/Shop_tab.dart';
 import '../Profile/Profile_tab.dart';
-import '../Shop/Shop_tab.dart';
 import 'Home_tab.dart';
 
 class HomeScreen extends StatefulWidget {
