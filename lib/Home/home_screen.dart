@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../Theme.dart';
-import '../Cart/Shop_tab.dart';
+import '../Cart/cart_tab.dart';
 import '../Profile/Profile_tab.dart';
 import 'Home_tab.dart';
 
@@ -42,5 +42,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List<Widget> tabs=[Hometab(),Shoptab(),Profiletab()];
+  List<Widget> tabs=[Hometab(),CartTab(),Profiletab()];
 }

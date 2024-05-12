@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'cart_widget.dart';
 
-class Shoptab extends StatefulWidget {
+class CartTab extends StatefulWidget {
 
-  const Shoptab({super.key});
+  const CartTab({super.key});
 
   @override
-  State<Shoptab> createState() => _ShoptabState();
+  State<CartTab> createState() => _ShoptabState();
 }
 
-class _ShoptabState extends State<Shoptab> {
+class _ShoptabState extends State<CartTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
