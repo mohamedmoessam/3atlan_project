@@ -10,10 +10,10 @@ class CartTab extends StatefulWidget {
   const CartTab({super.key});
 
   @override
-  State<CartTab> createState() => _ShoptabState();
+  State<CartTab> createState() => _CartTabState();
 }
 
-class _ShoptabState extends State<CartTab> {
+class _CartTabState extends State<CartTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
