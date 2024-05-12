@@ -36,11 +36,16 @@ class ServiceScreen extends StatelessWidget{
                   padding: const EdgeInsets.symmetric(vertical: 6),
                   child: Row(
                     children: [
-                      CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,),
+                      CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,child: Image.asset('assets/images/Electrical.png'),),
                       SizedBox(width: 10,),
-                      CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,),
+                      CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,child: Image.asset('assets/images/Mechanical.png')),
                       SizedBox(width: 10,),
-                      CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,),
+                      CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,child: Column(
+                        children: [
+                          Image.asset(scale: 2,'assets/images/Electrical.png'),
+                          Image.asset('assets/images/Mechanical.png'),
+                        ],
+                      )),
                     ],
                   ),
                 ),
@@ -131,11 +136,11 @@ class ServiceScreen extends StatelessWidget{
                 Text("Fuel service",style: Theme.of(context).textTheme.titleLarge),
                 Row(
                   children: [
-                    CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,),
+                    CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,child: Text('80'),),
                     SizedBox(width: 10,),
-                    CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,),
+                    CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,child: Text('92'),),
                     SizedBox(width: 10,),
-                    CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,),
+                    CircleAvatar(radius:30,backgroundColor:MyTheme.OrangeLight,child: Text('95'),),
                   ],
                 ),
                 Text("car wash",style: Theme.of(context).textTheme.titleLarge),

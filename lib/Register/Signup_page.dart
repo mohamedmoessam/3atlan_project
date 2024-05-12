@@ -28,13 +28,13 @@ final GlobalKey<FormState> _FormKey=GlobalKey<FormState>();
 
 
 Future<void> _register() async {
-  final String name = NameController.text;
-  final String phone = PhoneController.text;
-  final String email = EmailController.text;
-  final String pass = PasswordController.text;
-  final String confirm = ConfirmController.text;
-  final String carModel = CarModelController.text;
-  final String carYear = CarYearController.text;
+  final String name = NameController.text.trim();
+  final String phone = PhoneController.text.trim();
+  final String email = EmailController.text.trim();
+  final String pass = PasswordController.text.trim();
+  final String confirm = ConfirmController.text.trim();
+  final String carModel = CarModelController.text.trim();
+  final String carYear = CarYearController.text.trim();
 
 
 

@@ -19,8 +19,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _FormKey=GlobalKey<FormState>();
 
   Future<void> _login() async {
-    final String email = EmailController.text;
-    final String password = PasswordController.text;
+    final String email = EmailController.text.trim();
+    final String password = PasswordController.text.trim();
 
     // Call the login function of ApiManager
     final bool success = await apiManager.login(email: email, pass: password);
@@ -29,10 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
       // If login successful, navigate to home page
       Navigator.pushNamed(context,HomeScreen.RouteName);
     } else {
-
       // If login failed, display error message
       setState(() {
-        errorMessage = 'Invalid email or password. Please try again.';
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('user not found')));
       });
     }
   }
@@ -130,8 +129,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -139,16 +136,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   ElevatedButton(onPressed: (){
-                    setState(() {
 
-                    });
-                   _login();
+                    _login();
+                   setState(() {
+
+                   });
+                   // apiManager.GetData();
+
                     if (_FormKey.currentState!.validate()) {
                       // If the form is valid, display a snackbar. In the real world,
                       // you'd often call a server or save the information in a database.
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
+                         SnackBar(content: Text('logging in')),
                       );
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar( SnackBar(content: Text('Validation Error!')),);
                     }
                   }, child: Text('Login',style: Theme.of(context).textTheme.titleMedium,),
                       style: ElevatedButton.styleFrom(

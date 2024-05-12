@@ -1,4 +1,4 @@
-import 'package:final_one/Acessories/Item_Accessories_Widget.dart';
+import 'package:final_one/Home/Acessories/Item_Accessories_Widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../Theme.dart';

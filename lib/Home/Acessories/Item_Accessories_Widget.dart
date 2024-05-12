@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Theme.dart';
+import '../../Theme.dart';
+
 
 class ItemAccesoriesWidget extends StatefulWidget {
   List<String> Items=[];
@@ -28,7 +29,7 @@ class _ItemAccesoriesWidgetState extends State<ItemAccesoriesWidget> {
       children: [
         Expanded(
           child: Container(
-              width: MediaQuery.sizeOf(context).width*0.42,height: MediaQuery.sizeOf(context).height*0.27,
+              width: MediaQuery.sizeOf(context).width*0.5,height: MediaQuery.sizeOf(context).height*0.27,
               child: Image.asset(widget.ImagePath,fit: BoxFit.cover,)),
         ),
         Container(
