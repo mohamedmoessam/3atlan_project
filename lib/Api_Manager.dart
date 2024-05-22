@@ -14,7 +14,7 @@ class ApiManager {
     required String confirm,
     required String carModel,
     required String carYear}) async {
-    String url = ('https://threetlana.onrender.com/signup');
+    String url = ('https://threetlana.onrender.com/auth/signup');
     var data = jsonEncode({
       'name': name,
       'phone': phone,
@@ -42,7 +42,7 @@ class ApiManager {
   }
 
   Future<bool> login({required String email, required String pass}) async {
-    String url = ('https://threetlana.onrender.com/signin');
+    String url = ('https://threetlana.onrender.com/auth/signin');
     var data = jsonEncode({'email': email, 'password': pass});
     final response = await http.post(
       Uri.parse(url),
@@ -74,6 +74,26 @@ class ApiManager {
       return false;
     }
   }
+  Future<bool> Product() async {
+    String url = ('https://threetlana.onrender.com/shop');
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+
+    );
+
+    if (response.statusCode == 201) {
+      final responseData = json.decode(response.body);
+      String message=responseData['message'];
+      print(message);
+      return true;
+    } else {
+      print(response.body);
+      return false;
+    }
+  }
+
 //   Future<Map<String, dynamic>> GetData() async {
 //     // SharedPreferences prefs = await SharedPreferences.getInstance();
 //     // final token= prefs.getString('token');

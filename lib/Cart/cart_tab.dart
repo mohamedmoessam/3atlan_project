@@ -1,8 +1,6 @@
 import 'package:final_one/Cart/CheckOut_page.dart';
 import 'package:final_one/Theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'cart_widget.dart';
 
 class CartTab extends StatefulWidget {
@@ -22,7 +20,7 @@ class _CartTabState extends State<CartTab> {
         backgroundColor:MyTheme.PrimaryLight,
         elevation: 0,
         automaticallyImplyLeading: false,
-        title: Text("My Cart"),
+        title: const Text("My Cart"),
         titleTextStyle: const TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.bold,),
         centerTitle: true,
         actions: [
@@ -35,7 +33,7 @@ class _CartTabState extends State<CartTab> {
               Container(
                 height: MediaQuery.sizeOf(context).height*2,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.vertical(top:Radius.circular(50.0)), // Adjust the radius as needed
+                  borderRadius: const BorderRadius.vertical(top:Radius.circular(50.0)), // Adjust the radius as needed
                   color: MyTheme.BabyBlueLight, // Change color as needed
                 ),
               ),
@@ -73,17 +71,17 @@ class _CartTabState extends State<CartTab> {
                                           Icon(Icons.currency_pound, size: 25, color: MyTheme.BlackLight,),
                                         ]),
                                   ]),
-                              Spacer(),
+                              const Spacer(),
                               ElevatedButton(
                                   onPressed: () {
                                     Navigator.of(context).pushNamed(CheckoutPage.RouteName);
                                   },
                                   child: Text('Check Out', style: TextStyle(color: MyTheme.OrangeLight,fontWeight: FontWeight.bold,fontSize: 20),),
                                   style: ElevatedButton.styleFrom(
-                                      fixedSize: Size(130.0, 30.0),
+                                      fixedSize: const Size(130.0, 30.0),
                                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                                       backgroundColor: MyTheme.PrimaryLight,
-                                      padding: EdgeInsets.symmetric(horizontal: 10,))),
+                                      padding: const EdgeInsets.symmetric(horizontal: 10,))),
 
                             ]),
                       ),

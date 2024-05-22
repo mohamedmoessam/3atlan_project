@@ -24,9 +24,11 @@ class _CartWidgState extends State<CartWidg> {
   }
 
   void _decrementCounter() {
-    setState(() {
-      _counter--;
-    });
+    if (_counter > 0) {
+      setState(() {
+        _counter--;
+      });
+    }
   }
 
   @override

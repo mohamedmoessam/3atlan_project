@@ -106,6 +106,7 @@ class _ItemAccesoriesWidgetState extends State<ItemAccesoriesWidget> {
                     },),),
                 Spacer(),
                 ElevatedButton(onPressed: (){
+
                 }, child: Text('Buy',style: Theme.of(context).textTheme.titleMedium,),
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),

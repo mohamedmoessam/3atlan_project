@@ -22,7 +22,7 @@ class _ItemsState extends State<CarTireScreen> {
           backgroundColor: MyTheme.PrimaryLight,elevation: 0,
           title: Image.asset('assets/images/logo_light.png',),
         ),
-        body: ItemAccesoriesWidget(Items: Items1, currentoption: Items1[0], text1: 'Car Oil', text2: '450 £', ImagePath: 'assets/images/car_tire.png',)
+        body: ItemAccesoriesWidget(Items: Items1, currentoption: Items1[0], text1: 'Car Tire', text2: '450 £', ImagePath: 'assets/images/car_tire.png',)
     );
   }
 }
