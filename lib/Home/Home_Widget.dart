@@ -1,3 +1,5 @@
+import 'package:final_one/Home/Acessories/Item_Accessories_Widget.dart';
+import 'package:final_one/Home/Model/Items.dart';
 import 'package:flutter/material.dart';
 import '../../Theme.dart';
 
@@ -30,13 +32,14 @@ class Accessories extends StatelessWidget {
   Widget image;
   String Name;
   int Price;
-  String RouteName;
+  final Product product;
 
 
-  Accessories({required this.image,required this.Name,required this.Price,required this.RouteName});
+  Accessories({required this.image,required this.Name,required this.Price,required this.product});
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -68,7 +71,8 @@ class Accessories extends StatelessWidget {
                           ]),
                       ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamed(RouteName);
+                            String description=product.description??'';
+                            Navigator.push(context,MaterialPageRoute(builder: (context)=>  ItemAccesoriesScreen(Items:description.split(','), currentoption: description.split(",")[0], text1: product.name??'', text2: product.price.toString()??'', ImagePath: product.image??'image')));
                           },
                           child: Text('Next', style: Theme.of(context).textTheme.bodySmall,),
                           style: ElevatedButton.styleFrom(

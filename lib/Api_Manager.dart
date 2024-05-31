@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Home/Model/Items.dart';
+
 
 
 class ApiManager {
@@ -74,7 +76,7 @@ class ApiManager {
       return false;
     }
   }
-  Future<bool> Product() async {
+  Future<Items> Product() async {
     String url = ('https://threetlana.onrender.com/shop');
 
     final response = await http.get(
@@ -83,50 +85,18 @@ class ApiManager {
 
     );
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      String message=responseData['message'];
-      print(message);
-      return true;
+      print(responseData.runtimeType);
+      return Items.fromJson(responseData) ;
     } else {
       print(response.body);
-      return false;
+      return throw Exception('Failed to load products');
+
     }
   }
 
-//   Future<Map<String, dynamic>> GetData() async {
-//     // SharedPreferences prefs = await SharedPreferences.getInstance();
-//     // final token= prefs.getString('token');
-//     // final String url = ('http://$Ip:8000/profile/$token');
-//     final String url = ('https://threetlana.onrender.com/profile');
-//     final response = await http.get(
-//       Uri.parse(url),
-//     );
-//
-//     if (response.statusCode == 200) {
-//       final responseData = json.decode(response.body);
-//       final Userdata =  json.decode(responseData['user']);
-//       String name = Userdata['name'];
-//       String email = Userdata['email'];
-//       String carModel = Userdata['carModel'];
-//       int carYear = Userdata['carYear'];
-//       String phone = Userdata['phone'];
-//       SharedPreferences prefs = await SharedPreferences.getInstance();
-//       await prefs.setString('name', name);
-//       await prefs.setString('email', email);
-//       await prefs.setString('carModel', carModel);
-//       await prefs.setString('carYear', carYear.toString());
-//       await prefs.setString('phone', phone);
-//
-//       // Parse user data from response body
-//       print(Userdata);
-//       return Userdata;
-//
-//     } else {
-//
-//       throw Exception('Failed to fetch user data');
-//     }
-//   }
+
 }
 
 
