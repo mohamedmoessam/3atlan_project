@@ -8,13 +8,14 @@ class ItemAccesoriesScreen extends StatefulWidget {
   String text1;
   String text2;
   String ImagePath;
+  String Id;
 
   ItemAccesoriesScreen(
       {required this.Items,
       required this.currentoption,
       required this.text1,
       required this.text2,
-      required this.ImagePath});
+      required this.ImagePath,required this.Id});
 
   @override
   State<ItemAccesoriesScreen> createState() => _ItemAccesoriesWidgetState();

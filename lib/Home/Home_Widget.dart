@@ -72,7 +72,7 @@ class Accessories extends StatelessWidget {
                       ElevatedButton(
                           onPressed: () {
                             String description=product.description??'';
-                            Navigator.push(context,MaterialPageRoute(builder: (context)=>  ItemAccesoriesScreen(Items:description.split(','), currentoption: description.split(",")[0], text1: product.name??'', text2: product.price.toString()??'', ImagePath: product.image??'image')));
+                            Navigator.push(context,MaterialPageRoute(builder: (context)=>  ItemAccesoriesScreen(Items:description.split(','), currentoption: description.split(",")[0], text1: product.name??'', text2: product.price.toString()??'', ImagePath: product.image??'image', Id: product.id)));
                           },
                           child: Text('Next', style: Theme.of(context).textTheme.bodySmall,),
                           style: ElevatedButton.styleFrom(
