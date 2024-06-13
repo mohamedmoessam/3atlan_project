@@ -40,13 +40,6 @@ class _CartTabState extends State<CartTab> {
               Column(
                 children: [
                   CartWidg(image: Image.asset('assets/images/car_tire.png'), Name: 'Car Tire',Type: 'Mobil 5W-30',Price:2400,),
-                  CartWidg(image: Image.asset('assets/images/car_tire.png'), Name: 'Car Tire',Type: 'Mobil 5W-30',Price:2400,),
-                  CartWidg(image: Image.asset('assets/images/exhaust.png'), Name: 'Car Exhaust',Type: 'Mobil 5W-30', Price: 1000),
-                  CartWidg(image: Image.asset('assets/images/exhaust.png'), Name: 'Car Exhaust',Type: 'Mobil 5W-30', Price: 1000),
-                  CartWidg(image: Image.asset('assets/images/exhaust.png'), Name: 'Car Exhaust',Type: 'Mobil 5W-30', Price: 1000),
-                  CartWidg(image: Image.asset('assets/images/exhaust.png'), Name: 'Car Exhaust',Type: 'Mobil 5W-30', Price: 1000),
-                  CartWidg(image: Image.asset('assets/images/exhaust.png'), Name: 'Car Exhaust',Type: 'Mobil 5W-30', Price: 1000),
-
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15.0),
                     child: Container(

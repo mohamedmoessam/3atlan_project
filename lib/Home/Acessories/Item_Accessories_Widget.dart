@@ -1,5 +1,7 @@
+import 'package:final_one/Api_Manager.dart';
 import 'package:flutter/material.dart';
 
+import '../../Cart/cart_tab.dart';
 import '../../Theme.dart';
 
 class ItemAccesoriesScreen extends StatefulWidget {
@@ -15,13 +17,16 @@ class ItemAccesoriesScreen extends StatefulWidget {
       required this.currentoption,
       required this.text1,
       required this.text2,
-      required this.ImagePath,required this.Id});
+      required this.ImagePath,
+        required this.Id});
 
   @override
   State<ItemAccesoriesScreen> createState() => _ItemAccesoriesWidgetState();
 }
 
+
 class _ItemAccesoriesWidgetState extends State<ItemAccesoriesScreen> {
+  final ApiManager apiManager=ApiManager();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,7 +150,17 @@ class _ItemAccesoriesWidgetState extends State<ItemAccesoriesScreen> {
                     ),
                     Spacer(),
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if(
+                          apiManager.AddToCart(id: widget.Id, name: widget.text1, price: widget.text2, description: widget.currentoption, image: widget.ImagePath, qty: '1')==true){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CartTab()));
+                      }
+                                else{
+                                 print('error');
+                          }
+
+
+                        },
                         child: Text(
                           'Buy',
                           style: Theme.of(context).textTheme.titleMedium,

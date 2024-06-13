@@ -55,6 +55,7 @@ class ApiManager {
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
       final UserData= responseData['user'];
+      String id=UserData['id'];
       String name=UserData['name'];
       String email=UserData['email'];
       String carModel=UserData['carModel'];
@@ -66,6 +67,7 @@ class ApiManager {
       await prefs.setString('carModel', carModel);
       await prefs.setString('carYear', carYear.toString());
       await prefs.setString('phone', phone);
+      await prefs.setString('id', id);
       // final token =  responseData['token'];
       // SharedPreferences prefs = await SharedPreferences.getInstance();
       // await prefs.setString('token', token);
@@ -78,6 +80,58 @@ class ApiManager {
   }
   Future<Items> Product() async {
     String url = ('https://threetlana.onrender.com/shop');
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print(responseData.runtimeType);
+      return Items.fromJson(responseData) ;
+    } else {
+      print(response.body);
+      return throw Exception('Failed to load products');
+
+    }
+  }
+  Future<bool> AddToCart({required String id,
+    required String name,
+    required String price,
+    required String description,
+    required String image,
+    required String qty,
+
+        }) async {
+    String url = ('https://threetlana.onrender.com/cart/$id');
+    var data = jsonEncode({
+      "_id": id,
+      "name": name,
+      "price": price,
+      "description": description,
+      "image": image,
+      "qty": qty,
+    });
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      body: data,
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      String message=responseData['message'];
+      print(message);
+      return true;
+    } else {
+      print(response.body);
+      return false;
+    }
+  }
+  Future<Items> GetCart() async {
+    String url = ('https://threetlana.onrender.com/cart');
 
     final response = await http.get(
       Uri.parse(url),
