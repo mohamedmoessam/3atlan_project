@@ -51,7 +51,7 @@ class Product {
     name : json['name'],
     price : json['price'],
     description : json['description'],
-    image : json['image'],
+    image : "https://threetlana.onrender.com/"+ json['image'],
     qty : json['qty'],
    );
   }

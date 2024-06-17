@@ -111,7 +111,7 @@ class _HometabState extends State<Hometab> {
                       return Column(
                         children: snapshot.data!.products!.map((product) {
                           return Accessories(
-                            image: Image.network(product.image ?? 'https://via.placeholder.com/150'),
+                            image: Image.network((product.image??"")),
                             Name: product.name!,
                             Price: product.price!,
                              product: product,

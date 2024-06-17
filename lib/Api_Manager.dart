@@ -1,5 +1,6 @@
 import 'dart:convert';
 // ignore: depend_on_referenced_packages
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -54,30 +55,33 @@ class ApiManager {
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      final UserData= responseData['user'];
-      String id=UserData['id'];
-      String name=UserData['name'];
-      String email=UserData['email'];
-      String carModel=UserData['carModel'];
-      int carYear=UserData['carYear'];
-      String phone=UserData['phone'];
+      final userData = responseData['user'];
+
+      // Check for null values and assign default values if necessary
+      String token = responseData['token'] ?? '';
+      String name = userData['name'] ?? '';
+      String email = userData['email'] ?? '';
+      String carModel = userData['carModel'] ?? '';
+      int carYear = userData['carYear'] ?? 0;
+      String phone = userData['phone'] ?? '';
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('name', name);
       await prefs.setString('email', email);
       await prefs.setString('carModel', carModel);
       await prefs.setString('carYear', carYear.toString());
       await prefs.setString('phone', phone);
-      await prefs.setString('id', id);
-      // final token =  responseData['token'];
-      // SharedPreferences prefs = await SharedPreferences.getInstance();
-      // await prefs.setString('token', token);
-      print(UserData);
+      await prefs.setString('token', token);
+
+      print(userData);
+      print(responseData);
       return true;
     } else {
       print(response.body);
       return false;
     }
   }
+
   Future<Items> Product() async {
     String url = ('https://threetlana.onrender.com/shop');
 
@@ -97,32 +101,36 @@ class ApiManager {
 
     }
   }
-  Future<bool> AddToCart({required String id,
-    required String name,
-    required String price,
-    required String description,
-    required String image,
-    required String qty,
-
-        }) async {
+  Future<bool> AddToCart({
+    required String id,
+  }) async {
     String url = ('https://threetlana.onrender.com/cart/$id');
+
+    // Retrieve the token from SharedPreferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    if (token == null) {
+      print("Token not found in SharedPreferences");
+      return false;
+    }
+
     var data = jsonEncode({
       "_id": id,
-      "name": name,
-      "price": price,
-      "description": description,
-      "image": image,
-      "qty": qty,
     });
+
     final response = await http.post(
       Uri.parse(url),
-      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization': 'Bearer $token', // Include the token as a Bearer token
+      },
       body: data,
     );
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      String message=responseData['message'];
+      String message = responseData['message'];
       print(message);
       return true;
     } else {
@@ -130,6 +138,8 @@ class ApiManager {
       return false;
     }
   }
+
+
   Future<Items> GetCart() async {
     String url = ('https://threetlana.onrender.com/cart');
 

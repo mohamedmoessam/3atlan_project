@@ -151,13 +151,10 @@ class _ItemAccesoriesWidgetState extends State<ItemAccesoriesScreen> {
                     Spacer(),
                     ElevatedButton(
                         onPressed: () {
-                          if(
-                          apiManager.AddToCart(id: widget.Id, name: widget.text1, price: widget.text2, description: widget.currentoption, image: widget.ImagePath, qty: '1')==true){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CartTab()));
-                      }
-                                else{
-                                 print('error');
-                          }
+
+                          apiManager.AddToCart(id:widget.Id);
+                          Navigator.push(context,MaterialPageRoute(builder: (context)=> CartTab()));
+
 
 
                         },

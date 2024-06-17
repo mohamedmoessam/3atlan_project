@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CartWidg extends StatefulWidget {
-  Widget image;
+  String image;
   String Name;
   String Type;
-  int Price;
+  String Price;
 
   CartWidg({required this.image,required this.Name,required this.Type,required this.Price,});
 
@@ -49,7 +49,7 @@ class _CartWidgState extends State<CartWidg> {
                 Container(
                     width:MediaQuery.sizeOf(context).width*0.25,
                     height:MediaQuery.sizeOf(context).height ,
-                    child: widget.image),
+                    child: Image.network(widget.image)),
                 Spacer(),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
