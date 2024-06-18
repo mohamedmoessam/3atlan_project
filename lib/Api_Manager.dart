@@ -1,9 +1,6 @@
 import 'dart:convert';
-// ignore: depend_on_referenced_packages
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'Home/Model/Items.dart';
 
 
@@ -82,6 +79,7 @@ class ApiManager {
     }
   }
 
+
   Future<Items> Product() async {
     String url = ('https://threetlana.onrender.com/shop');
 
@@ -101,24 +99,22 @@ class ApiManager {
 
     }
   }
+
+
   Future<bool> AddToCart({
     required String id,
   }) async {
     String url = ('https://threetlana.onrender.com/cart/$id');
-
     // Retrieve the token from SharedPreferences
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
-
     if (token == null) {
       print("Token not found in SharedPreferences");
       return false;
     }
-
     var data = jsonEncode({
       "_id": id,
     });
-
     final response = await http.post(
       Uri.parse(url),
       headers: {
@@ -127,7 +123,6 @@ class ApiManager {
       },
       body: data,
     );
-
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
       String message = responseData['message'];
@@ -146,9 +141,7 @@ class ApiManager {
     final response = await http.get(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
-
     );
-
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
       print(responseData.runtimeType);
@@ -156,7 +149,6 @@ class ApiManager {
     } else {
       print(response.body);
       return throw Exception('Failed to load products');
-
     }
   }
 
