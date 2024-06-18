@@ -170,6 +170,24 @@ class ApiManager {
     }
   }
 
+  Future<bool> VerificationCode({required String verification}) async {
+    String url = ('https://threetlana.onrender.com/auth/forget-password');
+    var data = jsonEncode({'verification': verification});
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      body: data,
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print(responseData);
+      return true;
+    } else {
+      print(response.body);
+      return false;
+    }
+  }
+
 
 }
 

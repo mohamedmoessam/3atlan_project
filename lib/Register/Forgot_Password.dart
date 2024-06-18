@@ -1,5 +1,5 @@
-import 'package:final_one/Home/home_screen.dart';
 import 'package:final_one/Register/Login_page.dart';
+import 'package:final_one/Register/verification_code.dart';
 import 'package:flutter/material.dart';
 import '../Api_Manager.dart';
 import '../Theme.dart';
@@ -22,7 +22,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
 
     if (success) {
       // If login successful, navigate to home page
-      Navigator.pushNamed(context, HomeScreen.RouteName);
+      Navigator.pushNamed(context, VerificationScreen.RouteName);
     } else {
       // If login failed, display error message
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('User not found')));

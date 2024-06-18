@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import '../Api_Manager.dart';
 import '../Theme.dart';
 
-class verificationScreen extends StatefulWidget {
-  static const String RouteName = "verification";
+class VerificationScreen extends StatefulWidget {
+  static const String RouteName = "verify";
 
   @override
-  State<verificationScreen> createState() => _ForgotPassScreenState();
+  State<VerificationScreen> createState() => _VerificationScreenState();
 }
 
-class _ForgotPassScreenState extends State<verificationScreen> {
-  var EmailController = TextEditingController();
+class _VerificationScreenState extends State<VerificationScreen> {
+  var VerificationController = TextEditingController();
 
-  Future<void> _ConfirmEmail() async {
-    final String email = EmailController.text.trim();
+  Future<void> _VerificationCode() async {
+    final String verification = VerificationController.text.trim();
 
     // Call the login function of ApiManager
-    final bool success = await apiManager.ConfirmEmail(email: email);
+    final bool success = await apiManager.VerificationCode(verification: verification);
 
     if (success) {
       // If login successful, navigate to home page
@@ -70,7 +70,7 @@ class _ForgotPassScreenState extends State<verificationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Email Address',
+                    'Verification Code',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   TextFormField(
@@ -90,7 +90,7 @@ class _ForgotPassScreenState extends State<verificationScreen> {
                       }
                       return null;
                     },
-                    controller: EmailController,
+                    controller: VerificationController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: MyTheme.DarkGreyLight,
@@ -109,16 +109,7 @@ class _ForgotPassScreenState extends State<verificationScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Please write your email to receive a ',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'confirmation code to set a new password.',
+                      '00:20 resend confirmation code',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
@@ -128,9 +119,9 @@ class _ForgotPassScreenState extends State<verificationScreen> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: _ConfirmEmail,
+                onPressed: _VerificationCode,
                 child: Text(
-                  'Confirm Email',
+                  'Confirm Code',
                   style: TextStyle(color: MyTheme.OrangeLight, fontSize: 20),
                 ),
                 style: ElevatedButton.styleFrom(
