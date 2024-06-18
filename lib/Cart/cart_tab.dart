@@ -41,7 +41,7 @@ class _CartTabState extends State<CartTab> {
                 Column(
                   children: [
                     CartWidg(
-                      image: 'https://threetlana.onrender.com/images/45d82ffa-4a1d-481b-9ade-3c91f948724f-Phone_holder.png',
+                      image: 'https://threetlana.onrender.com/images/b23f7605-f80a-44de-a866-1fc3486b2040-Car_tire.png',
                       Name: 'Car Tire',
                       Type: 'Mobil 5W-30',
                       Price: '2400',

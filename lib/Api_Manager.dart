@@ -152,6 +152,24 @@ class ApiManager {
     }
   }
 
+  Future<bool> ConfirmEmail({required String email}) async {
+    String url = ('https://threetlana.onrender.com/auth/forget-password');
+    var data = jsonEncode({'email': email});
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      body: data,
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print(responseData);
+      return true;
+    } else {
+      print(response.body);
+      return false;
+    }
+  }
+
 
 }
 

@@ -1,4 +1,5 @@
 import 'package:final_one/Api_Manager.dart';
+import 'package:final_one/Register/Forgot_Password.dart';
 import 'package:flutter/material.dart';
 import '../Home/home_screen.dart';
 import '../Theme.dart';
@@ -132,7 +133,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      TextButton(onPressed: (){}, child: Text('Forgot Password ?'),style: TextButton.styleFrom(foregroundColor: MyTheme.BabyBlueLight),),
+                      TextButton(onPressed: (){
+                        Navigator.of(context).pushNamed(ForgotPassScreen.RouteName);
+                      }, child: Text('Forgot Password ?'),style: TextButton.styleFrom(foregroundColor: MyTheme.BabyBlueLight),),
                     ],
                   ),
                   ElevatedButton(onPressed: (){

@@ -3,6 +3,7 @@ import 'package:final_one/Home/Acessories/Item_Accessories_Widget.dart';
 import 'package:final_one/Home/Services/Services_page.dart';
 import 'package:flutter/material.dart';
 import 'Home/home_screen.dart';
+import 'Register/Forgot_Password.dart';
 import 'Register/Login_page.dart';
 import 'Register/Signup_page.dart';
 import 'Theme.dart';
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
         HomeScreen.RouteName: (context)=>HomeScreen(),
         ServiceScreen.RouteName: (context)=>ServiceScreen(),
         CheckoutPage.RouteName: (context)=>CheckoutPage(),
+        ForgotPassScreen.RouteName: (context)=>ForgotPassScreen(),
+
 
 
 
