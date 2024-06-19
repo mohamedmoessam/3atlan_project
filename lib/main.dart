@@ -1,6 +1,6 @@
 import 'package:final_one/Cart/CheckOut_page.dart';
-import 'package:final_one/Home/Acessories/Item_Accessories_Widget.dart';
 import 'package:final_one/Home/Services/Services_page.dart';
+import 'package:final_one/Register/Reset_password.dart';
 import 'package:final_one/Register/verification_code.dart';
 import 'package:flutter/material.dart';
 import 'Home/home_screen.dart';
@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
         CheckoutPage.RouteName: (context)=>CheckoutPage(),
         ForgotPassScreen.RouteName: (context)=>ForgotPassScreen(),
         VerificationScreen.RouteName:(context)=>VerificationScreen(),
+        ResetPassScreen.RouteName:(context)=>ResetPassScreen(),
 
 
 

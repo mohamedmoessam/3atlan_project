@@ -171,8 +171,32 @@ class ApiManager {
   }
 
   Future<bool> VerificationCode({required String verification}) async {
-    String url = ('https://threetlana.onrender.com/auth/forget-password');
+    String url = 'https://threetlana.onrender.com/auth/verification';
     var data = jsonEncode({'verification': verification});
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      body: data,
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      String userId = responseData['userId'] ?? '';
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('userId', userId);
+      print(responseData);
+      return true;
+    } else {
+      print(response.body);
+      return false;
+    }
+  }
+
+  Future<bool> ResetPass({required String password, required String confirmPassword}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString('userId');
+
+    String url = 'https://threetlana.onrender.com/auth/reset-password/$userId';
+    var data = jsonEncode({'password': password, 'confirmPassword': confirmPassword});
     final response = await http.post(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -189,6 +213,10 @@ class ApiManager {
   }
 
 
-}
+
+
+  }
+
+
 
 

@@ -1,5 +1,5 @@
-import 'package:final_one/Home/home_screen.dart';
 import 'package:final_one/Register/Login_page.dart';
+import 'package:final_one/Register/Reset_password.dart';
 import 'package:flutter/material.dart';
 import '../Api_Manager.dart';
 import '../Theme.dart';
@@ -17,15 +17,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
   Future<void> _VerificationCode() async {
     final String verification = VerificationController.text.trim();
 
-    // Call the login function of ApiManager
+
     final bool success = await apiManager.VerificationCode(verification: verification);
 
     if (success) {
-      // If login successful, navigate to home page
-      Navigator.pushNamed(context, HomeScreen.RouteName);
+      Navigator.pushNamed(context, ResetPassScreen.RouteName);
+
     } else {
-      // If login failed, display error message
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('User not found')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error')));
     }
   }
 

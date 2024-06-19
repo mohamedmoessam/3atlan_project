@@ -17,14 +17,12 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
   Future<void> _ConfirmEmail() async {
     final String email = EmailController.text.trim();
 
-    // Call the login function of ApiManager
     final bool success = await apiManager.ConfirmEmail(email: email);
 
     if (success) {
-      // If login successful, navigate to home page
       Navigator.pushNamed(context, VerificationScreen.RouteName);
     } else {
-      // If login failed, display error message
+
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('User not found')));
     }
   }
