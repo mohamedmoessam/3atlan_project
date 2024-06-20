@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:switcher_button/switcher_button.dart';
 import '../../Theme.dart';
 import '../Api_Manager.dart';
+import '../Register/Forgot_Password.dart';
 
 class Profiletab extends StatefulWidget {
   @override
@@ -119,7 +120,9 @@ class _ProfiletabState extends State<Profiletab> {
                         thickness: 1,
                       ),
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(ForgotPassScreen.RouteName);
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

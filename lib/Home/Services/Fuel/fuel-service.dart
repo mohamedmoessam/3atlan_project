@@ -1,14 +1,11 @@
+import 'package:final_one/Home/Services/Fuel/Fuel.dart';
 import 'package:flutter/material.dart';
-import 'package:final_one/Home/Services/category_widget.dart';
 import '../../../Api_Manager.dart';
-import 'Fuel.dart';
-
-
-
+import '../category_widget.dart';
 
 
 class FuelService extends StatefulWidget {
-  static const String RouteName = 'fuel';
+  static const String RouteName = 'Fuel';
 
   @override
   State<FuelService> createState() => _FuelServiceState();
@@ -16,6 +13,7 @@ class FuelService extends StatefulWidget {
 
 class _FuelServiceState extends State<FuelService> {
   final ApiManager apiManager = ApiManager();
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +30,15 @@ class _FuelServiceState extends State<FuelService> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             final technicians = snapshot.data?.service?.technicians ?? [];
+            final serviceId = snapshot.data?.service?.id ?? '';
             return ListView.builder(
               itemCount: technicians.length,
               itemBuilder: (context, index) {
                 final technician = technicians[index];
                 return CategoryServiceWidget(
                   name: technician.name ?? 'No Name',
-                  phone: technician.phone ?? 'No Phone',
+                  phone: technician.phone ?? 'No Phone', serviceId: serviceId,
+
                 );
               },
             );
@@ -50,4 +50,3 @@ class _FuelServiceState extends State<FuelService> {
     );
   }
 }
-

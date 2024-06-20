@@ -85,7 +85,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
 
-
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: EmailController,
                         decoration: InputDecoration(
@@ -142,9 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     _login();
                    setState(() {
-
                    });
-                   // apiManager.GetData();
 
                     if (_FormKey.currentState!.validate()) {
                       // If the form is valid, display a snackbar. In the real world,

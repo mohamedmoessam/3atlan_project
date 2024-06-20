@@ -6,6 +6,7 @@ import 'package:final_one/Home/Services/Electro-mechanical/ELectro-mechanical_se
 import 'package:final_one/Home/Services/Fuel/fuel-service.dart';
 import 'package:final_one/Home/Services/Services_page.dart';
 import 'package:final_one/Home/Services/Mechanical/Mechanical_service.dart';
+import 'package:final_one/Home/Services/car-rescue/car_rescue.dart';
 import 'package:final_one/Register/Reset_password.dart';
 import 'package:final_one/Register/verification_code.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         CarWashService.RouteName:(context)=>CarWashService(),
         AirService.RouteName:(context)=>AirService(),
         FuelService.RouteName:(context)=>FuelService(),
+        CarRescueService.RouteName:(context)=>CarRescueService(),
         ElectroMechanicalService.RouteName:(context)=>ElectroMechanicalService(),
 
 

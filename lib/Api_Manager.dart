@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:final_one/Home/Services/Electro-mechanical/ELectro-mechanical_service.dart';
 import 'package:final_one/Home/Services/Electro-mechanical/electromechanical.dart';
 import 'package:final_one/Home/Services/Mechanical/Mechanical.dart';
 import 'package:final_one/Home/Services/Nitrogen/nitrogen.dart';
@@ -63,8 +62,8 @@ class ApiManager {
       final responseData = json.decode(response.body);
       final userData = responseData['user'];
 
-      // Check for null values and assign default values if necessary
       String token = responseData['token'] ?? '';
+      String userid = userData['id'] ?? '';
       String name = userData['name'] ?? '';
       String email = userData['email'] ?? '';
       String carModel = userData['carModel'] ?? '';
@@ -78,8 +77,8 @@ class ApiManager {
       await prefs.setString('carYear', carYear.toString());
       await prefs.setString('phone', phone);
       await prefs.setString('token', token);
+      await prefs.setString('id', userid);
 
-      print(userData);
       print(responseData);
       return true;
     } else {
@@ -230,7 +229,6 @@ class ApiManager {
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print(response.body);
       return Mechanical.fromJson(responseData) ;
     } else {
       print(response.body);
@@ -249,7 +247,6 @@ class ApiManager {
     );
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print(response.body);
       return Nitrogen.fromJson(responseData) ;
     } else {
       print(response.body);
@@ -268,7 +265,6 @@ class ApiManager {
     );
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print(response.body);
       return Rescue.fromJson(responseData) ;
     } else {
       print(response.body);
@@ -287,7 +283,6 @@ class ApiManager {
     );
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print(response.body);
       return Electrical.fromJson(responseData) ;
     } else {
       print(response.body);
@@ -306,7 +301,6 @@ class ApiManager {
     );
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print(response.body);
       return Wash.fromJson(responseData) ;
     } else {
       print(response.body);
@@ -325,7 +319,6 @@ class ApiManager {
     );
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print(response.body);
       return Air.fromJson(responseData) ;
     } else {
       print(response.body);
@@ -345,7 +338,6 @@ class ApiManager {
     );
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print(response.body);
       return Fuel.fromJson(responseData) ;
     } else {
       print(response.body);
@@ -365,7 +357,6 @@ class ApiManager {
     );
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print(response.body);
       return Electromechanical.fromJson(responseData) ;
     } else {
       print(response.body);
@@ -374,7 +365,34 @@ class ApiManager {
     }
   }
 
+  Future<bool> bookService({required String userId, required String serviceId}) async {
+    String url = 'https://threetlana.onrender.com/service/book-service';
+    var data = jsonEncode({'userId': userId, 'serviceId': serviceId});
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        body: data,
+      );
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        print(responseData);
+        return true;
+      } else {
+        print('Error: ${response.statusCode}');
+        print('Response: ${response.body}');
+        return false;
+      }
+    } catch (e) {
+      print('Exception: $e');
+      return false;
+    }
   }
+
+
+}
+
+
 
 
 

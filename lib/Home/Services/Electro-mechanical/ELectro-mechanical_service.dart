@@ -1,12 +1,11 @@
 import 'package:final_one/Home/Services/Electro-mechanical/electromechanical.dart';
 import 'package:flutter/material.dart';
-import 'package:final_one/Home/Services/category_widget.dart';
 import '../../../Api_Manager.dart';
-
+import '../category_widget.dart';
 
 
 class ElectroMechanicalService extends StatefulWidget {
-  static const String RouteName = 'electromechanical';
+  static const String RouteName = 'Electro-mechanical';
 
   @override
   State<ElectroMechanicalService> createState() => _ElectroMechanicalServiceState();
@@ -14,6 +13,7 @@ class ElectroMechanicalService extends StatefulWidget {
 
 class _ElectroMechanicalServiceState extends State<ElectroMechanicalService> {
   final ApiManager apiManager = ApiManager();
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +30,15 @@ class _ElectroMechanicalServiceState extends State<ElectroMechanicalService> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             final technicians = snapshot.data?.service?.technicians ?? [];
+            final serviceId = snapshot.data?.service?.id ?? '';
             return ListView.builder(
               itemCount: technicians.length,
               itemBuilder: (context, index) {
                 final technician = technicians[index];
                 return CategoryServiceWidget(
                   name: technician.name ?? 'No Name',
-                  phone: technician.phone ?? 'No Phone',
+                  phone: technician.phone ?? 'No Phone', serviceId: serviceId,
+
                 );
               },
             );
@@ -48,4 +50,3 @@ class _ElectroMechanicalServiceState extends State<ElectroMechanicalService> {
     );
   }
 }
-

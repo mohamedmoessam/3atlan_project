@@ -1,7 +1,7 @@
 import 'package:final_one/Home/Services/Nitrogen/nitrogen.dart';
 import 'package:flutter/material.dart';
-import 'package:final_one/Home/Services/category_widget.dart';
 import '../../../Api_Manager.dart';
+import '../category_widget.dart';
 
 
 class NitrogenService extends StatelessWidget {
@@ -24,13 +24,15 @@ class NitrogenService extends StatelessWidget {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             final technicians = snapshot.data?.service?.technicians ?? [];
+            final serviceId = snapshot.data?.service?.id ?? '';
             return ListView.builder(
               itemCount: technicians.length,
               itemBuilder: (context, index) {
                 final technician = technicians[index];
                 return CategoryServiceWidget(
                   name: technician.name ?? 'No Name',
-                  phone: technician.phone ?? 'No Phone',
+                  phone: technician.phone ?? 'No Phone', serviceId: serviceId,
+
                 );
               },
             );
@@ -42,4 +44,3 @@ class NitrogenService extends StatelessWidget {
     );
   }
 }
-
