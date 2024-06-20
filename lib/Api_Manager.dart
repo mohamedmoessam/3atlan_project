@@ -1,7 +1,16 @@
 import 'dart:convert';
+import 'package:final_one/Home/Services/Electro-mechanical/ELectro-mechanical_service.dart';
+import 'package:final_one/Home/Services/Electro-mechanical/electromechanical.dart';
+import 'package:final_one/Home/Services/Mechanical/Mechanical.dart';
+import 'package:final_one/Home/Services/Nitrogen/nitrogen.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Home/Model/Items.dart';
+import 'Home/Services/Air/Air.dart';
+import 'Home/Services/Car-wash/Wash.dart';
+import 'Home/Services/Electrical/Electrical.dart';
+import 'Home/Services/Fuel/Fuel.dart';
+import 'Home/Services/car-rescue/Rescue.dart';
 
 
 
@@ -91,7 +100,6 @@ class ApiManager {
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print(responseData.runtimeType);
       return Items.fromJson(responseData) ;
     } else {
       print(response.body);
@@ -194,7 +202,6 @@ class ApiManager {
   Future<bool> ResetPass({required String password, required String confirmPassword}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = prefs.getString('userId');
-
     String url = 'https://threetlana.onrender.com/auth/reset-password/$userId';
     var data = jsonEncode({'password': password, 'confirmPassword': confirmPassword});
     final response = await http.post(
@@ -212,8 +219,160 @@ class ApiManager {
     }
   }
 
+  Future<Mechanical> MechanicalService() async {
+    String url = ('https://threetlana.onrender.com/service/mechanical');
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print(response.body);
+      return Mechanical.fromJson(responseData) ;
+    } else {
+      print(response.body);
+      return throw Exception('Failed to load Service');
+
+    }
+  }
+
+  Future<Nitrogen> NitrogenService() async {
+    String url = ('https://threetlana.onrender.com/service/nitrogen');
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print(response.body);
+      return Nitrogen.fromJson(responseData) ;
+    } else {
+      print(response.body);
+      return throw Exception('Failed to load Service');
+
+    }
+  }
+
+  Future<Rescue> CarRescueService() async {
+    String url = ('https://threetlana.onrender.com/service/car-rescue');
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print(response.body);
+      return Rescue.fromJson(responseData) ;
+    } else {
+      print(response.body);
+      return throw Exception('Failed to load Service');
+
+    }
+  }
+
+  Future<Electrical> ElectricalService() async {
+    String url = ('https://threetlana.onrender.com/service/electrical');
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print(response.body);
+      return Electrical.fromJson(responseData) ;
+    } else {
+      print(response.body);
+      return throw Exception('Failed to load Service');
+
+    }
+  }
+
+  Future<Wash> CarWashService() async {
+    String url = ('https://threetlana.onrender.com/service/wash');
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print(response.body);
+      return Wash.fromJson(responseData) ;
+    } else {
+      print(response.body);
+      return throw Exception('Failed to load Service');
+
+    }
+  }
+
+  Future<Air> AirService() async {
+    String url = ('https://threetlana.onrender.com/service/air');
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print(response.body);
+      return Air.fromJson(responseData) ;
+    } else {
+      print(response.body);
+      return throw Exception('Failed to load Service');
+
+    }
+  }
 
 
+  Future<Fuel> FuelService() async {
+    String url = ('https://threetlana.onrender.com/service/fuel');
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print(response.body);
+      return Fuel.fromJson(responseData) ;
+    } else {
+      print(response.body);
+      return throw Exception('Failed to load Service');
+
+    }
+  }
+
+
+  Future<Electromechanical> ElectroMechanicalService() async {
+    String url = ('https://threetlana.onrender.com/service/electro-mechanical');
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print(response.body);
+      return Electromechanical.fromJson(responseData) ;
+    } else {
+      print(response.body);
+      return throw Exception('Failed to load Service');
+
+    }
+  }
 
   }
 

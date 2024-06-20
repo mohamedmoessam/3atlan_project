@@ -1,4 +1,10 @@
-import 'package:final_one/Home/Acessories/Item_Accessories_Widget.dart';
+import 'package:final_one/Home/Services/Air/Air-service.dart';
+import 'package:final_one/Home/Services/Car-wash/Car-wash.dart';
+import 'package:final_one/Home/Services/Electrical/Electrical-service.dart';
+import 'package:final_one/Home/Services/Fuel/fuel-service.dart';
+import 'package:final_one/Home/Services/Mechanical/Mechanical_service.dart';
+import 'package:final_one/Home/Services/Nitrogen/Nitrogen_service.dart';
+import 'package:final_one/Home/Services/car-rescue/car_rescue.dart';
 import 'package:flutter/material.dart';
 import 'package:final_one/Home/Model/Items.dart';
 import 'package:final_one/Home/Services/Services_page.dart';
@@ -14,9 +20,9 @@ class Hometab extends StatefulWidget {
 class _HometabState extends State<Hometab> {
   final ApiManager apiManager = ApiManager();
 
-  Future<Items> _loadData() async {
-    return await apiManager.Product();
-  }
+  // Future<Items> _loadData() async {
+  //   return await apiManager.Product();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -60,40 +66,78 @@ class _HometabState extends State<Hometab> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      Services(image: Image.asset('assets/images/Mechanical.png')),
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundColor: MyTheme.OrangeLight,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('N', style: Theme.of(context).textTheme.titleMedium),
-                            Image.asset('assets/images/Air.png'),
-                          ],
+                      InkWell(
+                        onTap: (){
+                          apiManager.MechanicalService();
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => MechanicalService(),));
+
+                        },
+                          child: Services(image: Image.asset('assets/images/Mechanical.png'))),
+                      InkWell(
+                        onTap: (){
+                          apiManager.NitrogenService();
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => NitrogenService(),));
+                        },
+                        child: CircleAvatar(
+                          radius: 40,
+                          backgroundColor: MyTheme.OrangeLight,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('N', style: Theme.of(context).textTheme.titleMedium),
+                              Image.asset('assets/images/Air.png'),
+                            ],
+                          ),
                         ),
                       ),
-                      Services(image: Image.asset('assets/images/Truck.png')),
-                      Services(image: Image.asset('assets/images/Electrical.png')),
-                      Services(image: Image.asset('assets/images/car_wash.png')),
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundColor: MyTheme.OrangeLight,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset('assets/images/Electrical.png', width: 20, height: 20),
-                            Image.asset('assets/images/Air.png'),
-                          ],
-                        ),
+                      InkWell(
+                        onTap: (){
+                          apiManager.CarRescueService();
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => CarRescueService(),));
+                        },
+                          child: Services(image: Image.asset('assets/images/Truck.png'))),
+                      InkWell(
+                        onTap: (){
+                          apiManager.ElectricalService();
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ElectricalService(),));
+                        },
+                          child: Services(image: Image.asset('assets/images/Electrical.png'))),
+                      InkWell(
+                        onTap: (){
+                       apiManager.CarWashService();
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => CarWashService(),));
+
+
+                        },
+                          child: Services(image: Image.asset('assets/images/car_wash.png'))),
+                      InkWell(
+                        onTap: (){
+                        apiManager.AirService();
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => AirService(),));
+
+                        },
+                        child: Services(
+                          image: Image.asset('assets/images/Air.png')
+                        )
                       ),
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundColor: MyTheme.OrangeLight,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('92', style: Theme.of(context).textTheme.titleLarge),
-                          ],
+                      InkWell(
+                        onTap: (){
+                           apiManager.FuelService();
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => FuelService(),));
+
+
+
+
+                        },
+                        child: CircleAvatar(
+                          radius: 40,
+                          backgroundColor: MyTheme.OrangeLight,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('92', style: Theme.of(context).textTheme.titleLarge),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -101,7 +145,7 @@ class _HometabState extends State<Hometab> {
                 ),
                 Text("Accessories", style: Theme.of(context).textTheme.titleLarge),
                 FutureBuilder<Items>(
-                  future: _loadData(),
+                  future: apiManager.Product(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
