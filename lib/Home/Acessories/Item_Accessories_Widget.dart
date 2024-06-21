@@ -152,8 +152,11 @@ class _ItemAccesoriesWidgetState extends State<ItemAccesoriesScreen> {
                     ElevatedButton(
                         onPressed: () {
 
-                          apiManager.AddToCart(id:widget.Id);
+                          apiManager.AddToCart(id:widget.Id,type: widget.currentoption);
                           Navigator.push(context,MaterialPageRoute(builder: (context)=> CartTab()));
+                          setState(() {
+
+                          });
 
 
 

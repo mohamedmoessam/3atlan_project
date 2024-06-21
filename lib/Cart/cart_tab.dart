@@ -1,16 +1,18 @@
 import 'package:final_one/Cart/CheckOut_page.dart';
+import 'package:final_one/Cart/Model/CartItems.dart';
 import 'package:final_one/Theme.dart';
 import 'package:flutter/material.dart';
+import '../Api_Manager.dart';
 import 'cart_widget.dart';
 
 class CartTab extends StatefulWidget {
-  const CartTab({super.key});
-
   @override
   State<CartTab> createState() => _CartTabState();
 }
 
 class _CartTabState extends State<CartTab> {
+  final ApiManager apiManager = ApiManager();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,102 +32,120 @@ class _CartTabState extends State<CartTab> {
         child: Stack(
           children: [
             Container(
-              height: MediaQuery.sizeOf(context).height * 2,
+              height: MediaQuery.of(context).size.height * 2,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(50.0)),
                 color: MyTheme.BabyBlueLight,
               ),
             ),
-            ListView(
-              children: [
-                Column(
-                  children: [
-                    CartWidg(
-                      image: 'https://threetlana.onrender.com/images/b23f7605-f80a-44de-a866-1fc3486b2040-Car_tire.png',
-                      Name: 'Car Tire',
-                      Type: 'Mobil 5W-30',
-                      Price: '2400',
-                    ),
-                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.15 + 30), // Add space to avoid overlap with the subtotal row
-                  ],
-                ),
-              ],
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
-                child: Container(
-                  height: MediaQuery.sizeOf(context).height * 0.15,
-                  width: MediaQuery.sizeOf(context).width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(23.0),
-                    color: MyTheme.WhiteLight,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30),
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Subtotal",
-                              style: TextStyle(
-                                color: MyTheme.OrangeLight,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
+            FutureBuilder<CartItems>(
+              future: apiManager.GetCart(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || snapshot.data!.cart!.isEmpty) {
+                  return const Center(child: Text('No items in cart'));
+                } else {
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 80.0), // Padding to avoid overlap with the Positioned widget
+                          child: ListView.builder(
+                            itemCount: snapshot.data!.cart!.length,
+                            itemBuilder: (context, index) {
+                              final cartItem = snapshot.data!.cart![index];
+                              return CartWidg(
+                                Name: cartItem.product!.name!,
+                                Type: cartItem.type!,
+                                Price: cartItem.product!.price!.toString(),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.15,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(23.0),
+                              color: MyTheme.WhiteLight,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Subtotal",
+                                        style: TextStyle(
+                                          color: MyTheme.OrangeLight,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            snapshot.data!.totalPrice.toString(),
+                                            style: TextStyle(
+                                              color: MyTheme.BlackLight,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 25,
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.currency_pound,
+                                            size: 25,
+                                            color: MyTheme.BlackLight,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed(CheckoutPage.RouteName);
+                                    },
+                                    child: Text(
+                                      'Check Out',
+                                      style: TextStyle(
+                                        color: MyTheme.OrangeLight,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      fixedSize: const Size(130.0, 30.0),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      backgroundColor: MyTheme.PrimaryLight,
+                                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Row(
-                              children: [
-                                Text(
-                                  "8000",
-                                  style: TextStyle(
-                                    color: MyTheme.BlackLight,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.currency_pound,
-                                  size: 25,
-                                  color: MyTheme.BlackLight,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamed(CheckoutPage.RouteName);
-                          },
-                          child: Text(
-                            'Check Out',
-                            style: TextStyle(
-                              color: MyTheme.OrangeLight,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(130.0, 30.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            backgroundColor: MyTheme.PrimaryLight,
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+                      ),
+                    ],
+                  );
+                }
+              },
             ),
           ],
         ),
@@ -133,7 +153,3 @@ class _CartTabState extends State<CartTab> {
     );
   }
 }
-
-
-
-

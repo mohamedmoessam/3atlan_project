@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:final_one/Cart/Model/CartItems.dart';
 import 'package:final_one/Home/Services/Electro-mechanical/electromechanical.dart';
 import 'package:final_one/Home/Services/Mechanical/Mechanical.dart';
 import 'package:final_one/Home/Services/Nitrogen/nitrogen.dart';
@@ -110,6 +111,7 @@ class ApiManager {
 
   Future<bool> AddToCart({
     required String id,
+    required String type
   }) async {
     String url = ('https://threetlana.onrender.com/cart/$id');
     // Retrieve the token from SharedPreferences
@@ -121,6 +123,7 @@ class ApiManager {
     }
     var data = jsonEncode({
       "_id": id,
+      "type":type
     });
     final response = await http.post(
       Uri.parse(url),
@@ -142,17 +145,20 @@ class ApiManager {
   }
 
 
-  Future<Items> GetCart() async {
+  Future<CartItems> GetCart() async {
     String url = ('https://threetlana.onrender.com/cart');
-
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
     final response = await http.get(
       Uri.parse(url),
-      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization': 'Bearer $token',
+      },
     );
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print(responseData.runtimeType);
-      return Items.fromJson(responseData) ;
+      return CartItems.fromJson(responseData) ;
     } else {
       print(response.body);
       return throw Exception('Failed to load products');
@@ -182,7 +188,9 @@ class ApiManager {
     var data = jsonEncode({'verification': verification});
     final response = await http.post(
       Uri.parse(url),
-      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      headers: {'Content-Type': 'application/json; charset=utf-8',
+      },
+
       body: data,
     );
     if (response.statusCode == 200) {
