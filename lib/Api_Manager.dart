@@ -152,7 +152,7 @@ class ApiManager {
     final response = await http.get(
       Uri.parse(url),
       headers: {
-        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Type': 'json/application; charset=utf-8',
         'Authorization': 'Bearer $token',
       },
     );

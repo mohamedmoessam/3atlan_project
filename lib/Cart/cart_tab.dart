@@ -12,6 +12,19 @@ class CartTab extends StatefulWidget {
 
 class _CartTabState extends State<CartTab> {
   final ApiManager apiManager = ApiManager();
+  late Future<CartItems> _cartFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _cartFuture = apiManager.GetCart(); // Initialize the cart future
+  }
+
+  void _refreshCart() {
+    setState(() {
+      _cartFuture = apiManager.GetCart(); // Refresh the cart items
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +52,13 @@ class _CartTabState extends State<CartTab> {
               ),
             ),
             FutureBuilder<CartItems>(
-              future: apiManager.GetCart(),
+              future: _cartFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || snapshot.data!.cart!.isEmpty) {
+                } else if (!snapshot.hasData || snapshot.data!.cart == null || snapshot.data!.cart!.isEmpty) {
                   return const Center(child: Text('No items in cart'));
                 } else {
                   return Column(
@@ -58,10 +71,12 @@ class _CartTabState extends State<CartTab> {
                             itemBuilder: (context, index) {
                               final cartItem = snapshot.data!.cart![index];
                               return CartWidg(
-                                Name: cartItem.product!.name!,
-                                Type: cartItem.type!,
-                                Price: cartItem.product!.price!.toString(),
-                                image: cartItem.image!, // Correctly fetch the image URL
+                                productId: cartItem.product?.id ?? '', // Use a default value or check for null
+                                Name: cartItem.product?.name ?? 'Unknown', // Use a default value or check for null
+                                Type: cartItem.type ?? 'Unknown', // Use a default value or check for null
+                                Price: cartItem.product?.price?.toString() ?? '0.0', // Use a default value or check for null
+                                image: cartItem.image ?? '', // Use a default value or check for null
+                                onDelete: _refreshCart, // Add this line
                               );
                             },
                           ),
@@ -95,7 +110,7 @@ class _CartTabState extends State<CartTab> {
                                     Row(
                                       children: [
                                         Text(
-                                          snapshot.data!.totalPrice.toString(),
+                                          snapshot.data!.totalPrice?.toString() ?? '0.0', // Use a default value or check for null
                                           style: TextStyle(
                                             color: MyTheme.BlackLight,
                                             fontWeight: FontWeight.bold,

@@ -1,20 +1,23 @@
 import 'package:final_one/Theme.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../Api_Manager.dart';
 
 class CartWidg extends StatefulWidget {
+  final String productId;
   final String image;
   final String Name;
   final String Type;
   final String Price;
+  final VoidCallback onDelete; // Add this line
 
   const CartWidg({
+    required this.productId,
     required this.image,
     required this.Name,
     required this.Type,
     required this.Price,
+    required this.onDelete, // Add this line
     Key? key,
   }) : super(key: key);
 
@@ -24,19 +27,10 @@ class CartWidg extends StatefulWidget {
 
 class _CartWidgState extends State<CartWidg> {
   final ApiManager apiManager = ApiManager();
-  String _userid = '';
 
-  @override
-  void initState() {
-    super.initState();
-    _getData();
-  }
-
-  Future<void> _getData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _userid = prefs.getString('id')!;
-    });
+  Future<void> _deleteFromCart() async {
+    await apiManager.DeleteFromCart(id: widget.productId);
+    widget.onDelete(); // Call the callback to refresh the cart
   }
 
   @override
@@ -102,9 +96,8 @@ class _CartWidgState extends State<CartWidg> {
               Column(
                 children: [
                   FloatingActionButton.small(
-                    onPressed: () {
-                      apiManager.DeleteFromCart(id: _userid);
-                      setState(() {});
+                    onPressed: () async {
+                      await _deleteFromCart(); // Wait for deletion
                     },
                     backgroundColor: Colors.transparent,
                     elevation: 0,
