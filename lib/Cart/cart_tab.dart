@@ -75,7 +75,7 @@ class _CartTabState extends State<CartTab> {
                                 Name: cartItem.product?.name ?? 'Unknown', // Use a default value or check for null
                                 Type: cartItem.type ?? 'Unknown', // Use a default value or check for null
                                 Price: cartItem.product?.price?.toString() ?? '0.0', // Use a default value or check for null
-                                image: cartItem.image ?? '', // Use a default value or check for null
+                                image: 'https://threetlana.onrender.com/' + (cartItem.image ?? ''), // Ensure image is not null
                                 onDelete: _refreshCart, // Add this line
                               );
                             },
