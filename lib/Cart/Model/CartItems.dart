@@ -1,6 +1,6 @@
 /// message : "cart returned"
-/// cart : [{"product":{"_id":"66718a346f3e2bfb72fd982f","name":"Car Lantern","price":500},"qty":1,"type":"Fogs","_id":"6674b3a8fe37730c3bb84ecc"}]
-/// totalPrice : 500
+/// cart : [{"product":{"_id":"6674d07e24addc55e619bffa","name":"Car Tire","price":300},"qty":1,"type":"22","image":"images/899b72e5-2eb8-492b-9ef3-d2252889ca9e-Car_tire.png","_id":"66758596da0755110c3e179d"},{"product":{"_id":"6674d07e24addc55e619bffa","name":"Car Tire","price":300},"qty":1,"type":"27","image":"images/899b72e5-2eb8-492b-9ef3-d2252889ca9e-Car_tire.png","_id":"667585a0da0755110c3e17ab"},{"product":{"_id":"66758648da0755110c3e17bb","name":"Phone Holder","price":150},"qty":1,"type":"Dashboard Mounts","image":"images/19f3220a-bf55-4871-9c3c-6988cfc4630c-Phone_holder.png","_id":"66758658da0755110c3e17c8"}]
+/// totalPrice : 750
 
 class CartItems {
   CartItems({
@@ -34,27 +34,31 @@ class CartItems {
 
 }
 
-/// product : {"_id":"66718a346f3e2bfb72fd982f","name":"Car Lantern","price":500}
+/// product : {"_id":"6674d07e24addc55e619bffa","name":"Car Tire","price":300}
 /// qty : 1
-/// type : "Fogs"
-/// _id : "6674b3a8fe37730c3bb84ecc"
+/// type : "22"
+/// image : "images/899b72e5-2eb8-492b-9ef3-d2252889ca9e-Car_tire.png"
+/// _id : "66758596da0755110c3e179d"
 
 class Cart {
   Cart({
       this.product, 
       this.qty, 
       this.type, 
+      this.image, 
       this.id,});
 
   Cart.fromJson(dynamic json) {
     product = json['product'] != null ? Product.fromJson(json['product']) : null;
     qty = json['qty'];
     type = json['type'];
+    image = json['image'];
     id = json['_id'];
   }
   Product? product;
   int? qty;
   String? type;
+  String? image;
   String? id;
 
   Map<String, dynamic> toJson() {
@@ -64,15 +68,16 @@ class Cart {
     }
     map['qty'] = qty;
     map['type'] = type;
+    map['image'] = image;
     map['_id'] = id;
     return map;
   }
 
 }
 
-/// _id : "66718a346f3e2bfb72fd982f"
-/// name : "Car Lantern"
-/// price : 500
+/// _id : "6674d07e24addc55e619bffa"
+/// name : "Car Tire"
+/// price : 300
 
 class Product {
   Product({

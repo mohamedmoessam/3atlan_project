@@ -35,8 +35,8 @@ class _MechanicalServiceState extends State<MechanicalService> {
               itemBuilder: (context, index) {
                 final technician = technicians[index];
                 return CategoryServiceWidget(
-                  name: technician.name ?? 'No Name',
-                  phone: technician.phone ?? 'No Phone', serviceId: serviceId,
+                  name: 'Eng/'+technician.name! ,
+                  phone: 'Phone/'+technician.phone! , serviceId: serviceId,
 
                 );
               },

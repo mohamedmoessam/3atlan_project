@@ -165,6 +165,41 @@ class ApiManager {
     }
   }
 
+  Future<bool> DeleteFromCart({
+    required String id,
+  }) async {
+    String url = ('https://threetlana.onrender.com/cart/$id');
+    // Retrieve the token from SharedPreferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    if (token == null) {
+      print("Token not found in SharedPreferences");
+      return false;
+    }
+    var data = jsonEncode({
+      "_id": id,
+    });
+    final response = await http.delete(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Authorization': 'Bearer $token', // Include the token as a Bearer token
+      },
+      body: data,
+    );
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      String message = responseData['message'];
+      print(message);
+      return true;
+    } else {
+      print(response.body);
+      return false;
+    }
+  }
+
+
+
   Future<bool> ConfirmEmail({required String email}) async {
     String url = ('https://threetlana.onrender.com/auth/forget-password');
     var data = jsonEncode({'email': email});
@@ -361,7 +396,6 @@ class ApiManager {
     final response = await http.get(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json; charset=utf-8'},
-
     );
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);

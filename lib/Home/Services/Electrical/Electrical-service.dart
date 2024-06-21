@@ -1,5 +1,4 @@
 import 'package:final_one/Home/Services/Electrical/Electrical.dart';
-import 'package:final_one/Home/Services/Nitrogen/nitrogen.dart';
 import 'package:flutter/material.dart';
 import '../../../Api_Manager.dart';
 import '../category_widget.dart';
@@ -37,9 +36,8 @@ class _ElectricalServiceState extends State<ElectricalService> {
               itemBuilder: (context, index) {
                 final technician = technicians[index];
                 return CategoryServiceWidget(
-                  name: technician.name ?? 'No Name',
-                  phone: technician.phone ?? 'No Phone', serviceId: serviceId,
-
+                  name: 'Eng/'+technician.name! ,
+                  phone: 'Phone/'+technician.phone! , serviceId: serviceId,
                 );
               },
             );

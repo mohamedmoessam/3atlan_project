@@ -52,7 +52,7 @@ class _CartTabState extends State<CartTab> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(bottom: 80.0), // Padding to avoid overlap with the Positioned widget
+                          padding: const EdgeInsets.only(bottom: 50.0),
                           child: ListView.builder(
                             itemCount: snapshot.data!.cart!.length,
                             itemBuilder: (context, index) {
@@ -61,83 +61,79 @@ class _CartTabState extends State<CartTab> {
                                 Name: cartItem.product!.name!,
                                 Type: cartItem.type!,
                                 Price: cartItem.product!.price!.toString(),
+                                image: cartItem.image!, // Correctly fetch the image URL
                               );
                             },
                           ),
                         ),
                       ),
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(23.0),
-                              color: MyTheme.WhiteLight,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Subtotal",
-                                        style: TextStyle(
-                                          color: MyTheme.OrangeLight,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            snapshot.data!.totalPrice.toString(),
-                                            style: TextStyle(
-                                              color: MyTheme.BlackLight,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 25,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.currency_pound,
-                                            size: 25,
-                                            color: MyTheme.BlackLight,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushNamed(CheckoutPage.RouteName);
-                                    },
-                                    child: Text(
-                                      'Check Out',
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(23.0),
+                            color: MyTheme.WhiteLight,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30),
+                            child: Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Subtotal",
                                       style: TextStyle(
                                         color: MyTheme.OrangeLight,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20,
+                                        fontSize: 25,
                                       ),
                                     ),
-                                    style: ElevatedButton.styleFrom(
-                                      fixedSize: const Size(130.0, 30.0),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25),
-                                      ),
-                                      backgroundColor: MyTheme.PrimaryLight,
-                                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          snapshot.data!.totalPrice.toString(),
+                                          style: TextStyle(
+                                            color: MyTheme.BlackLight,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.currency_pound,
+                                          size: 25,
+                                          color: MyTheme.BlackLight,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(CheckoutPage.RouteName);
+                                  },
+                                  child: Text(
+                                    'Check Out',
+                                    style: TextStyle(
+                                      color: MyTheme.OrangeLight,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
                                     ),
                                   ),
-                                ],
-                              ),
+                                  style: ElevatedButton.styleFrom(
+                                    fixedSize: const Size(130.0, 30.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    backgroundColor: MyTheme.PrimaryLight,
+                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),

@@ -1,14 +1,17 @@
 import 'package:final_one/Theme.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../Api_Manager.dart';
 
 class CartWidg extends StatefulWidget {
-  // final String image;
+  final String image;
   final String Name;
   final String Type;
   final String Price;
 
   const CartWidg({
-    // required this.image,
+    required this.image,
     required this.Name,
     required this.Type,
     required this.Price,
@@ -20,15 +23,21 @@ class CartWidg extends StatefulWidget {
 }
 
 class _CartWidgState extends State<CartWidg> {
-  // bool _isVisible = true;
+  final ApiManager apiManager = ApiManager();
+  String _userid = '';
 
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
 
-
-  // void _deleteItem() {
-  //   setState(() {
-  //     _isVisible = false;
-  //   });
-  // }
+  Future<void> _getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _userid = prefs.getString('id')!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +59,7 @@ class _CartWidgState extends State<CartWidg> {
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.25,
                   height: MediaQuery.sizeOf(context).height,
-                  child: Image.network(''),
+                  child: Image.network(widget.image),
                 ),
               ),
               Spacer(),
@@ -93,7 +102,10 @@ class _CartWidgState extends State<CartWidg> {
               Column(
                 children: [
                   FloatingActionButton.small(
-                    onPressed: (){},
+                    onPressed: () {
+                      apiManager.DeleteFromCart(id: _userid);
+                      setState(() {});
+                    },
                     backgroundColor: Colors.transparent,
                     elevation: 0,
                     child: Icon(

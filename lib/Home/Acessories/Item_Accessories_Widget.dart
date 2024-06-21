@@ -1,6 +1,5 @@
 import 'package:final_one/Api_Manager.dart';
 import 'package:flutter/material.dart';
-
 import '../../Cart/cart_tab.dart';
 import '../../Theme.dart';
 
@@ -14,19 +13,19 @@ class ItemAccesoriesScreen extends StatefulWidget {
 
   ItemAccesoriesScreen(
       {required this.Items,
-      required this.currentoption,
-      required this.text1,
-      required this.text2,
-      required this.ImagePath,
+        required this.currentoption,
+        required this.text1,
+        required this.text2,
+        required this.ImagePath,
         required this.Id});
 
   @override
   State<ItemAccesoriesScreen> createState() => _ItemAccesoriesWidgetState();
 }
 
-
 class _ItemAccesoriesWidgetState extends State<ItemAccesoriesScreen> {
-  final ApiManager apiManager=ApiManager();
+  final ApiManager apiManager = ApiManager();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,12 +52,13 @@ class _ItemAccesoriesWidgetState extends State<ItemAccesoriesScreen> {
               height: MediaQuery.sizeOf(context).height * 0.6,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(50.0)),
+                borderRadius:
+                BorderRadius.vertical(top: Radius.circular(50.0)),
                 color: MyTheme.BabyBlueLight,
               ),
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 child: Column(
                   children: [
                     Row(
@@ -150,16 +150,18 @@ class _ItemAccesoriesWidgetState extends State<ItemAccesoriesScreen> {
                     ),
                     Spacer(),
                     ElevatedButton(
-                        onPressed: () {
-
-                          apiManager.AddToCart(id:widget.Id,type: widget.currentoption);
-                          Navigator.push(context,MaterialPageRoute(builder: (context)=> CartTab()));
-                          setState(() {
-
-                          });
-
-
-
+                        onPressed: () async {
+                          // Wait for AddToCart to complete
+                          await apiManager.AddToCart(
+                              id: widget.Id, type: widget.currentoption);
+                          // Wait for GetCart to complete
+                          await apiManager.GetCart();
+                          // Navigate to the CartTab
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CartTab()));
+                          setState(() {});
                         },
                         child: Text(
                           'Buy',
@@ -171,7 +173,7 @@ class _ItemAccesoriesWidgetState extends State<ItemAccesoriesScreen> {
                             backgroundColor: MyTheme.OrangeLight,
                             padding: EdgeInsets.symmetric(
                                 horizontal:
-                                    MediaQuery.sizeOf(context).width * 0.3,
+                                MediaQuery.sizeOf(context).width * 0.3,
                                 vertical: 10))),
                   ],
                 ),
