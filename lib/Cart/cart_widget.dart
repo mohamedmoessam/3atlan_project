@@ -1,6 +1,5 @@
 import 'package:final_one/Theme.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../Api_Manager.dart';
 
 class CartWidg extends StatefulWidget {

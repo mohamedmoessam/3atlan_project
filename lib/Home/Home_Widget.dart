@@ -5,7 +5,7 @@ import '../../Theme.dart';
 
 
 class Services extends StatefulWidget {
-  Widget image;
+  final Widget image;
 
   Services({ required this.image});
   @override
@@ -29,9 +29,9 @@ class _ServicesState extends State<Services> {
 }
 
 class Accessories extends StatelessWidget {
-  Widget image;
-  String Name;
-  int Price;
+  final Widget image;
+  final String Name;
+ final int Price;
   final Product product;
 
 
@@ -43,7 +43,7 @@ class Accessories extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: MediaQuery.sizeOf(context).height*0.15, width: MediaQuery.sizeOf(context).width*1,
+        height: MediaQuery.sizeOf(context).height*0.22, width: MediaQuery.sizeOf(context).width*1,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(25),color: MyTheme.OrangeLight),
         child: Padding(
           padding: const EdgeInsets.all(5),
