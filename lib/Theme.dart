@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class MyTheme{
   static Color PrimaryLight=Color(0xffd5d5da);
   static Color BlackLight=Color(0xff000000);
+  static Color GreenLight=Color(0xff00AF26);
   static Color OrangeLight=Color(0xffF39422);
   static Color BabyBlueLight=Color(0xff537EC5);
   static Color DarkBlueLight=Color(0xff010038);

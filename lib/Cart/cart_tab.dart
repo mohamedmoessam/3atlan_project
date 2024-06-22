@@ -2,6 +2,7 @@ import 'package:final_one/Cart/CheckOut_page.dart';
 import 'package:final_one/Cart/Model/CartItems.dart';
 import 'package:final_one/Theme.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Api_Manager.dart';
 import 'cart_widget.dart';
 
@@ -24,6 +25,11 @@ class _CartTabState extends State<CartTab> {
     setState(() {
       _cartFuture = apiManager.GetCart(); // Refresh the cart items
     });
+  }
+
+  Future<void> _saveTotalPrice(double totalPrice) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('totalPrice', totalPrice);
   }
 
   @override
@@ -61,6 +67,7 @@ class _CartTabState extends State<CartTab> {
                 } else if (!snapshot.hasData || snapshot.data!.cart == null || snapshot.data!.cart!.isEmpty) {
                   return const Center(child: Text('No items in cart'));
                 } else {
+                  final totalPrice = snapshot.data!.totalPrice?.toDouble() ?? 0.0;
                   return Column(
                     children: [
                       Expanded(
@@ -110,7 +117,7 @@ class _CartTabState extends State<CartTab> {
                                     Row(
                                       children: [
                                         Text(
-                                          snapshot.data!.totalPrice?.toString() ?? '0.0', // Use a default value or check for null
+                                          totalPrice.toString(),
                                           style: TextStyle(
                                             color: MyTheme.BlackLight,
                                             fontWeight: FontWeight.bold,
@@ -128,7 +135,8 @@ class _CartTabState extends State<CartTab> {
                                 ),
                                 const Spacer(),
                                 ElevatedButton(
-                                  onPressed: () {
+                                  onPressed: () async {
+                                    await _saveTotalPrice(totalPrice);
                                     Navigator.of(context).pushNamed(CheckoutPage.RouteName);
                                   },
                                   child: Text(
